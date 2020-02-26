@@ -7,13 +7,7 @@ import TemplateGraphql from './templates/graphql';
 export default class FactoryNode extends Factory {
     id: string;
     description: string;
-    commands: (CommandDb | CommandServe | CommandGenerate | CommandBuild)[];
+    commands: (CommandBuild | CommandServe | CommandDb | CommandGenerate)[];
     templates: TemplateGraphql[];
     execOpts: any;
-    get nodeModulesPath(): string;
-    get prismaBin(): string;
-    get tsnodeBin(): string;
-    get tsnodedevBin(): string;
-    get cntBin(): string;
-    get createTypesBin(): string;
 }
