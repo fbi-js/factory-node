@@ -1,0 +1,29 @@
+{
+  "name": "factory-node",
+  "version": "0.0.0",
+  "description": "factory factory-node description",
+  "private": true,
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "fbi b",
+    "watch": "fbi w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "fbi": "workspace:*",
+    "create-nexus-type": "^1.1.7",
+    "prisma2": "2.0.0-preview022",
+    "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tslib": "^1.11.0",
+    "typescript": "^3.8.2"
+  },
+  "devDependencies": {
+    "tslib": "^1.11.0",
+    "@types/node": "^13.7.6",
+    "@types/ejs": "^3.0.1"
+  }
+}
