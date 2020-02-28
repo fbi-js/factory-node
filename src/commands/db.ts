@@ -7,12 +7,19 @@ export default class CommandDb extends Command {
   args = ''
   flags = [
     ['-u, --up', 'Apply any migrations that have not been applied yet'],
-    ['-d, --down', 'Undo migrations']
+    ['-d, --down', 'Undo migrations'],
+    ['-s, --studio', 'Modern database IDE']
   ]
-  description = 'database migrations'
+  description = 'database migrations and IDE'
 
   constructor(public factory: Factory) {
     super()
+  }
+
+  public disable() {
+    return this.context.get('config.factory.features.prisma')
+      ? false
+      : 'Because there is no database model to maintain.'
   }
 
   public async run(args: any, flags: any) {
@@ -20,12 +27,25 @@ export default class CommandDb extends Command {
 
     let action = 'up'
     if (!flags.up && !flags.down) {
-      const ret = await this.prompt({
+      const ret: Record<string, any> = await this.prompt({
         type: 'select',
         name: 'action',
         message: 'Choose an action:',
         hint: 'Use arrow-keys, <return> to submit',
-        choices: ['up', 'down']
+        choices: [
+          {
+            name: 'up',
+            hint: 'Apply any migrations that have not been applied yet'
+          },
+          {
+            name: 'down',
+            hint: 'Undo migrations'
+          },
+          {
+            name: 'studio',
+            hint: 'Modern database IDE'
+          }
+        ]
       })
 
       action = ret.action
@@ -45,6 +65,9 @@ export default class CommandDb extends Command {
         break
       case 'down':
         await this.exec.command('prisma2 migrate down --experimental', execOpts)
+        break
+      case 'studio':
+        await this.exec.command('prisma2 studio --experimental', execOpts)
         break
     }
 

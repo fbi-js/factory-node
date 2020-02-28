@@ -12,6 +12,12 @@ export default class CommandGenerate extends Command {
     super()
   }
 
+  public disable() {
+    return this.context.get('config.factory.features.prisma')
+      ? false
+      : 'Because there is no database model to maintain.'
+  }
+
   public async run(args: any, flags: any) {
     this.debug(`Factory: (${this.factory.id})`, 'from command', `"${this.id}"`)
 

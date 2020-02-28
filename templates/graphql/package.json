@@ -10,10 +10,12 @@
   "scripts": {
     "start": "node dist/server",
     "dev": "fbi s",
-    "build": "fbi b",
-    "db:up": "fbi d -u",
+    "build": "fbi b"
+    <%_ if (project.features.prisma) { _%>
+    ,"db:up": "fbi d -u",
     "db:down": "fbi d -d",
     "generate": "fbi g"
+    <%_ } _%>
   },
   "dependencies": {
     "graphql": "14.6.0",

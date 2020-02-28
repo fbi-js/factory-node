@@ -8,5 +8,6 @@ export default class CommandDb extends Command {
     flags: string[][];
     description: string;
     constructor(factory: Factory);
+    disable(): false | "Because there is no database model to maintain.";
     run(args: any, flags: any): Promise<void>;
 }

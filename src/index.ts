@@ -7,7 +7,7 @@ import CommandGenerate from './commands/generate'
 import TemplateGraphql from './templates/graphql'
 
 export default class FactoryNode extends Factory {
-  id = 'node'
+  id = 'factory-node'
   description = 'factory for node.js application development'
   commands = [
     new CommandBuild(this),

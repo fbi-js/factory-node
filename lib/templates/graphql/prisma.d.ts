@@ -1,14 +1,12 @@
 import { Template } from 'fbi';
 import * as ejs from 'ejs';
-import Factory from '..';
-import SubTemplatePrisma from './graphql/prisma';
+import Factory from '../..';
 export default class TemplateGraphql extends Template {
     factory: Factory;
     id: string;
     description: string;
     path: string;
     renderer: typeof ejs.render;
-    templates: SubTemplatePrisma[];
     constructor(factory: Factory);
     protected gathering(): Promise<void>;
     protected writing(): Promise<void>;
