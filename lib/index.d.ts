@@ -6,8 +6,9 @@ import CommandGenerate from './commands/generate';
 import TemplateGraphql from './templates/graphql';
 export default class FactoryNode extends Factory {
     id: string;
+    version: any;
     description: string;
-    commands: (CommandServe | CommandDb | CommandGenerate | CommandBuild)[];
+    commands: (CommandBuild | CommandServe | CommandDb | CommandGenerate)[];
     templates: TemplateGraphql[];
     execOpts: any;
 }

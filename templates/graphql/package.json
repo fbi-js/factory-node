@@ -3,17 +3,15 @@
   "version": "0.0.0",
   "description": "<%= project.description %>",
   "private": true,
-  "main": "lib/index.js",
   "keywords": [],
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server",
+    "start": "node index",
     "dev": "fbi s",
     "build": "fbi b"
     <%_ if (project.features.prisma) { _%>
-    ,"db:up": "fbi d -u",
-    "db:down": "fbi d -d",
+    ,"db": "fbi d",
     "generate": "fbi g"
     <%_ } _%>
   },
