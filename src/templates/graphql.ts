@@ -72,18 +72,13 @@ export default class TemplateGraphql extends Template {
       copy: ['.editorconfig', '.prettierrc', '.gitignore', 'tsconfig.json'],
       render: [
         'package.json',
-        '.fbi.config.js',
         'README.md',
-        {
-          from: 'src/**/*',
-          to: `src`,
-          options: {
-            ignore: 'src/permissions/*'
-          }
-        },
-        'src/index.ts',
+        'src/*',
+        'src/**/*/!(auth.ts|permissions.ts)',
         project.features.prisma ? 'prisma/**/*' : '',
-        project.features.permissions ? 'src/permissions' : ''
+        ...(project.features.permissions
+          ? ['src/graphql-custom/auth.ts', 'src/middlewares/permissions.ts']
+          : [])
       ],
       renderOptions: {
         async: true
@@ -169,7 +164,7 @@ Next steps:
     let dbUrlChoices: any = []
     if (provider === 'postgresql' || provider === 'mysql') {
       dbUrlChoices = dbUrlChoices.concat([
-        { name: 'host', message: 'host', initial: '' },
+        { name: 'host', message: 'host', initial: 'localhost' },
         {
           name: 'port',
           message: 'port',
@@ -193,7 +188,7 @@ Next steps:
     }
 
     if (provider === 'postgresql') {
-      dbUrlChoices.push({ name: 'schema', message: 'schema', initial: '' })
+      dbUrlChoices.push({ name: 'schema', message: 'schema', initial: 'public' })
       dbUrlChoices.push({
         name: 'url',
         message: 'database url',

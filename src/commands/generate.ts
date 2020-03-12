@@ -18,7 +18,7 @@ export default class CommandGenerate extends Command {
       : 'Because there is no database model to maintain.'
   }
 
-  public async run(args: any, flags: any) {
+  public async run(flags: any) {
     this.debug(`Factory: (${this.factory.id})`, 'from command', `"${this.id}"`)
 
     this.logStart(`Start generating:`)
@@ -28,13 +28,11 @@ export default class CommandGenerate extends Command {
     }
 
     this.logItem('prisma client files...')
+    // node_modules/@prisma/client
     await this.exec.command('prisma2 generate', execOpts)
 
-    this.logItem('typescript nexus...')
-    await this.exec.command('cnt --mq -f -o', execOpts)
-
-    this.logItem('typescript types...')
-    await this.exec.command('create-types', execOpts)
+    this.logItem('graphql types...')
+    await this.exec.command('cnt --mq -f -o --outDir=src/graphql', execOpts)
 
     this.logItem('nexus files...')
     await this.exec.command('ts-node --transpile-only src/schema', execOpts)

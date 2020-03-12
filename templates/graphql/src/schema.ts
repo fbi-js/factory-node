@@ -1,9 +1,10 @@
 <%_ if (project.features.nexus) { _%>
+/// <reference path="./generated/nexus.ts" />
 import { makeSchema } from 'nexus'
 import { nexusPrismaPlugin } from 'nexus-prisma'
 <%_ } _%>
-import * as baseTypes from './types-base'
-import * as appTypes from './types'
+import * as baseTypes from './graphql-custom'
+import * as appTypes from './graphql'
 import { LogMutationTimePlugin } from './plugins/'
 
 export const schema = makeSchema({

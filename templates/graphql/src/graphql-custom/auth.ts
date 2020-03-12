@@ -1,8 +1,9 @@
-import { compare, hash } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
-
+import { compare, hash } from 'bcryptjs'
 import { arg, objectType, extendType, stringArg } from 'nexus'
-import { APP_SECRET } from '../utils'
+
+import { Context } from '../context'
+import { logger } from '../utils/logger'
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
@@ -23,7 +24,7 @@ export const authMutation = extendType({
         email: stringArg(),
         roles: arg({ type: 'RoleCreateManyWithoutUsersInput' })
       },
-      resolve: async (_parent, { name, email, password, roles }, ctx) => {
+      resolve: async (_parent, { name, email, password, roles }, ctx: Context) => {
         const hashedPassword = await hash(password, 10)
         const user = await ctx.prisma.user.create({
           data: {
@@ -34,7 +35,7 @@ export const authMutation = extendType({
           }
         })
         return {
-          token: sign({ userId: user.id }, APP_SECRET),
+          token: sign({ userId: user.id }, process.env.AUTH_SECRET as string),
           user
         }
       }
@@ -46,7 +47,7 @@ export const authMutation = extendType({
         name: stringArg({ nullable: false }),
         password: stringArg({ nullable: false })
       },
-      resolve: async (_parent, { name, password }, ctx) => {
+      resolve: async (_parent, { name, password }, ctx: Context) => {
         const user = await ctx.prisma.user.findOne({
           where: {
             name
@@ -60,7 +61,7 @@ export const authMutation = extendType({
           throw new Error('Invalid password')
         }
         return {
-          token: sign({ userId: user.id }, APP_SECRET),
+          token: sign({ userId: user.id }, process.env.AUTH_SECRET as string),
           user
         }
       }

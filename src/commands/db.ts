@@ -8,7 +8,8 @@ export default class CommandDb extends Command {
   flags = [
     ['-u, --up', 'Apply any migrations that have not been applied yet'],
     ['-d, --down', 'Undo migrations'],
-    ['-s, --studio', 'Modern database IDE']
+    ['-s, --studio', 'Modern database IDE'],
+    ['--seed', 'Seed your database']
   ]
   description = 'database migrations and IDE'
 
@@ -22,8 +23,8 @@ export default class CommandDb extends Command {
       : 'Because there is no database model to maintain.'
   }
 
-  public async run(args: any, flags: any) {
-    this.debug(`Factory: (${this.factory.id})`, 'from command', `"${this.id}"`, { args, flags })
+  public async run(flags: any) {
+    this.debug(`Factory: (${this.factory.id})`, 'from command', `"${this.id}"`, { flags })
 
     let action = 'up'
     if (!flags.up && !flags.down) {
@@ -44,6 +45,10 @@ export default class CommandDb extends Command {
           {
             name: 'studio',
             hint: 'Modern database IDE'
+          },
+          {
+            name: 'seed',
+            hint: 'Seed your database'
           }
         ]
       })
@@ -51,7 +56,7 @@ export default class CommandDb extends Command {
       action = ret.action
     }
 
-    this.logStart(`Start database migrate ${action}...`)
+    this.logStart(`Start database ${action}...`)
 
     const execOpts: any = {
       ...this.factory.execOpts,
@@ -68,6 +73,11 @@ export default class CommandDb extends Command {
         break
       case 'studio':
         await this.exec.command('prisma2 studio --experimental', execOpts)
+        break
+      case 'seed':
+        await this.exec.command('ts-node prisma/seed.ts', execOpts)
+        break
+      default:
         break
     }
 

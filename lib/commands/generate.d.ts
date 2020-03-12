@@ -9,5 +9,5 @@ export default class CommandGenerate extends Command {
     description: string;
     constructor(factory: Factory);
     disable(): false | "Because there is no database model to maintain.";
-    run(args: any, flags: any): Promise<void>;
+    run(flags: any): Promise<void>;
 }

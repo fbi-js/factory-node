@@ -8,7 +8,7 @@ export default class FactoryNode extends Factory {
     id: string;
     version: any;
     description: string;
-    commands: (CommandBuild | CommandServe | CommandDb | CommandGenerate)[];
+    commands: (CommandServe | CommandDb | CommandGenerate | CommandBuild)[];
     templates: TemplateGraphql[];
     execOpts: any;
 }

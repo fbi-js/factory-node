@@ -5,25 +5,42 @@ import Factory from '..'
 export default class CommandBuild extends Command {
   id = 'build'
   alias = 'b'
-  args = ''
   description = 'command build description'
-  flags = [['-d, --dev-dependencies', 'with devDependencies', false]]
+  args = ''
+  flags = [
+    ['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'production'],
+    ['-d, --dev-dependencies', 'with devDependencies', false]
+  ]
 
   constructor(public factory: Factory) {
     super()
   }
 
-  public async run(args: any, flags: any) {
-    this.debug(`Factory: (${this.factory.id})`, 'from command', `"${this.id}"`)
+  public async run(flags: any, unknown: any) {
+    process.env.NODE_ENV = flags.mode ?? 'production'
 
-    const spinner = this.createSpinner(`Start building...`).start()
+    this.debug(
+      `Factory: (${this.factory.id})`,
+      'from command',
+      `"${this.id}"`,
+      'flags:',
+      flags,
+      'unknown:',
+      unknown
+    )
 
-    const tsconfigPath = join(process.cwd(), 'tsconfig.json')
+    const _cwd = process.cwd()
+    const features = this.context.get('config.factory.features')
+
+    const tsconfigPath = join(_cwd, 'tsconfig.json')
     const hasTsconfigFile = await this.fs.pathExists(tsconfigPath)
     const tsconifg = hasTsconfigFile ? require(tsconfigPath) : null
-    const distDir = join(process.cwd(), tsconifg?.compilerOptions?.outDir || 'dist')
-    // const srcDir = join(process.cwd(), tsconifg.compilerOptions.rootDir||'src')
+    const distDirName = tsconifg?.compilerOptions?.outDir || 'dist'
+    const distDir = join(_cwd, distDirName)
+    // const srcDir = join(_cwd, tsconifg.compilerOptions.rootDir||'src')
 
+    this.logStart(`Start building:`)
+    this.logItem(`remove '${distDirName}'...`)
     await this.fs.remove(distDir)
 
     const execOpts: any = {
@@ -31,21 +48,29 @@ export default class CommandBuild extends Command {
       stdio: flags.debug ? 'inherit' : 'pipe'
     }
 
+    this.logItem('generate prisma client files...')
     await this.exec.command('prisma2 generate', execOpts)
+    this.logItem('compile ts files...')
     await this.exec.command('tsc', execOpts)
 
     if (flags.devDependencies) {
-      const pkg = require(join(process.cwd(), 'package.json'))
+      const pkg = require(join(_cwd, 'package.json'))
       const ver = this.factory.version ? `#${this.factory.version}` : ''
       pkg['devDependencies'] = utils.merge(pkg['devDependencies'], {
         [this.factory.id]: `github:fbi-js/${this.factory.id}${ver}`,
         fbi: '^4.0.0-alpha.1'
       })
 
+      this.logItem('generate package.json...')
       await this.fs.writeFile(join(distDir, 'package.json'), JSON.stringify(pkg, null, 2))
-      await this.fs.copy(join(process.cwd(), '.fbi.config.js'), join(distDir, '.fbi.config.js'))
-    }
+      this.logItem('copy .fbi.config.js...')
+      await this.fs.copy(join(_cwd, '.fbi.config.js'), join(distDir, '.fbi.config.js'))
 
-    spinner.succeed('build successfully')
+      if (features?.prisma) {
+        this.logItem('copy prisma folder...')
+        await this.fs.copy(join(_cwd, 'prisma'), join(distDir, 'prisma'))
+      }
+    }
+    this.logEnd('Build successfully')
   }
 }

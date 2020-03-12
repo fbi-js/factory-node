@@ -21,7 +21,7 @@ export interface Context {
   <%_ } _%>
 }
 
-export function createContext(request: ContextParameters) {
+export function createContext(request: ContextParameters): Context {
   return {
     ...request,
     pubsub,

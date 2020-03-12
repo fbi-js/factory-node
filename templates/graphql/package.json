@@ -7,7 +7,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "node index",
+    "start": "node app",
     "dev": "fbi s",
     "build": "fbi b"
     <%_ if (project.features.prisma) { _%>
@@ -17,30 +17,39 @@
   },
   "dependencies": {
     "graphql": "14.6.0",
-    "graphql-yoga": "1.18.3"
-    <%_ if (project.features.prisma) { _%>
-    ,"@prisma/client": "2.0.0-preview022",
+    "graphql-yoga": "1.18.3",
+    "winston": "^3.2.1",
     "dotenv": "^8.2.0"
+    <%_ if (project.features.prisma) { _%>
+    ,"@prisma/client": "2.0.0-preview023"
     <%_ } _%>
     <%_ if (project.features.nexus) { _%>
     ,"nexus": "0.12.0-rc.13",
-    "nexus-prisma": "0.10.0"
+    "nexus-prisma": "0.11.1"
     <%_ } _%>
     <%_ if (project.features.permissions) { _%>
     ,"bcryptjs": "2.4.3",
-    "graphql-shield": "7.0.14",
+    "graphql-shield": "7.2.0",
     "jsonwebtoken": "8.5.1"
     <%_ } _%>
   },
   "devDependencies": {
-    "tslib": "^1.11.0",
-    "@types/node": "*"
+    "tslib": "^1.11.1",
+    "@types/node": "^13.9.0"
     <%_ if (project.features.prisma) { _%>
     ,"@types/ws": "^7.2.2"
     <%_ } _%>
     <%_ if (project.features.permissions) { _%>
     ,"@types/bcryptjs": "^2.4.2",
-    "@types/jsonwebtoken": "*"
+    "@types/jsonwebtoken": "^8.3.8"
     <%_ } _%>
+  },
+  "fbi": {
+    "factory": {
+      "id": "<%= factory.id %>",
+      "version": "<%= factory.version %>",
+      "template": "<%= factory.template %>",
+      "features": <%- JSON.stringify(project.features) %>
+    }
   }
 }

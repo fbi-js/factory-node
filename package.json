@@ -1,7 +1,7 @@
 {
   "name": "factory-node",
   "version": "0.1.0",
-  "description": "factory factory-node description",
+  "description": "factory for node.js application development",
   "private": true,
   "main": "lib/index.js",
   "scripts": {
@@ -9,12 +9,13 @@
     "watch": "fbi w"
   },
   "keywords": [],
-  "author": "",
+  "author": "shaw @neikvon",
   "license": "MIT",
   "dependencies": {
-    "ejs": "^3.0.1",
-    "fbi": "^4.0.0-alpha.1",
     "create-nexus-type": "^1.1.7",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "fbi": "next",
     "prisma2": "2.0.0-preview023",
     "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
