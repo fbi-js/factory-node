@@ -10,7 +10,6 @@ import { version } from '../package.json'
 
 export default class FactoryNode extends Factory {
   id = 'factory-node'
-  version = version
   description = 'factory for node.js application development'
   commands = [
     new CommandBuild(this),
