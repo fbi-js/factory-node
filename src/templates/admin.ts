@@ -6,7 +6,7 @@ import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
 
 export default class TemplateFactory extends Template {
   id = 'admin'
-  description = 'template for factory-node'
+  description = 'template for admin'
   path = 'templates/admin'
   renderer = ejs.render
   templates = []

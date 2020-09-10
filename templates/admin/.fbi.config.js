@@ -3,6 +3,6 @@ module.exports = {
     id: '<%= factory.id %>',
     version: '<%= factory.version %>',
     template: '<%= factory.template %>',
-    features: '<%- JSON.stringify(project.features) %>'
+    features: <%- JSON.stringify(project.features) %>
   }
 }

@@ -6,7 +6,7 @@ import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
 
 export default class TemplateFactory extends Template {
   id = 'dal-basic'
-  description = 'template for factory-node'
+  description = 'template for dal-basic'
   path = 'templates/dal-basic'
   renderer = ejs.render
   templates = []

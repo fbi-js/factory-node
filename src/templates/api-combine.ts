@@ -6,7 +6,7 @@ import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
 
 export default class TemplateFactory extends Template {
   id = 'api-combine'
-  description = 'template for factory-node'
+  description = 'template for api-combine'
   path = 'templates/api-combine'
   renderer = ejs.render
   templates = []
