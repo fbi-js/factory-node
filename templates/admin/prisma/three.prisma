@@ -1,0 +1,18 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "/Users/junlinchen/project/mrapi/dev/examples/admin/node_modules/.prisma-mrapi/three"
+}
+
+datasource db {
+  provider = ["sqlite", "mysql", "postgresql"]
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  authorId  Int?
+  content   String?
+  id        Int     @default(autoincrement()) @id
+  published Boolean @default(false)
+  title     String
+}

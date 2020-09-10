@@ -1,0 +1,17 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "/Users/junlinchen/project/mrapi/dev/examples/admin/node_modules/.prisma-mrapi/two"
+}
+
+datasource db {
+  provider = ["sqlite", "mysql", "postgresql"]
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  email String  @unique
+  id    Int     @default(autoincrement()) @id
+  name  String?
+}
+
