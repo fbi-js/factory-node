@@ -1,6 +1,6 @@
 module.exports = {
   factory: {
-    id: 'factory-factory',
+    id: 'factory-node',
     version: '',
     template: 'factory',
     features: { typescript: true }

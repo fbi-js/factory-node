@@ -1,0 +1,36 @@
+{
+  "name": "dal",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "prod": "cross-env NODE_ENV=production node dist/src/app",
+    "build": "rm -rf dist && npm run generate && tsc",
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "prettier": "prettier --write src/**/*.ts",
+    "generate": "npm run gen1 && npm run gen2",
+    "gen1": "npx mrapi generate --name one",
+    "gen2": "npx mrapi generate --name two"
+  },
+  "author": "mrapi",
+  "license": "ISC",
+  "dependencies": {
+    "@mrapi/dal": "1.0.0-beta.2",
+    "@mrapi/cli": "1.0.0-beta.2",
+    "cross-env": "^7.0.2"
+  },
+  "devDependencies": {
+    "tslib": "^2.0.1",
+    "prettier": "^2.1.1",
+    "typescript": "^4.0.2",
+    "ts-node-dev": "1.0.0-pre.62"
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
