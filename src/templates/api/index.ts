@@ -20,33 +20,15 @@ export default class TemplateWeb extends Template {
 
   protected async gathering(flags: Record<string, any>) {
     const defaultName = this.data.project && this.data.project.name || 'project-demo'
-    const {language} = await this.prompt(
-      {
-        type: 'select',
-        name: 'language',
-        message: `Which language do you want to use?`,
-        hint: '(Use <arrow> to select, <return> to submit)',
-        choices: [
-          { name: 'vue', value: true },
-          { name: 'react', value: true }
-        ],
-        result(name: string) {
-          return name
-        }
-      } as any
-    )
     this.projectInfo = await this.prompt([
       {
         type: 'Select',
-        name: 'vueVersion',
-        message: `Which version of vue do you want to choice?`,
+        name: 'features',
+        message: `Which package usage mode do you want to choice?`,
         hint: '(Use <arrow> to select, <return> to submit)',
-        skip({state}: any) {
-          return language === 'react' ? true : false
-        },
         choices: [
-          { name: 'vue2', value: true },
-          { name: 'vue3', value: true }
+          { name: 'standalone', value: true },
+          { name: 'combined', value: true }
         ],
         result(names: string[]) {
           return this.map(names)
@@ -84,8 +66,8 @@ export default class TemplateWeb extends Template {
     }
 
     const temps = utils.flatten(this.factory.templates.map((f: any) => f.templates))
-    const choiseId = language === 'react' ? 'react' : project.vueVersion.vue2 ? 'vue' : 'vue3'
-    const choiseTemp = temps.filter((it:any) => it.id === choiseId)[0]
+    const choiceId = project.features.standalone ? 'api-basic' :'api-combine'
+    const choiseTemp = temps.find((it:any) => it.id === choiceId)
 
     if (choiseTemp) {
       // set init data
@@ -116,6 +98,8 @@ export default class TemplateWeb extends Template {
           updatedAt: Date.now()
         })
       }
+    } else {
+      this.error(`template ${choiceId} not found`).exit()
     }
   }
 
