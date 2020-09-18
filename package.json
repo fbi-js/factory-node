@@ -5,8 +5,8 @@
   "private": true,
   "main": "lib/index.js",
   "scripts": {
-    "build": "fbi b",
-    "watch": "fbi w"
+    "build": "rm -rf lib && tsc -p .",
+    "watch": "npm run build && tsc --watch"
   },
   "keywords": [],
   "author": "shaw @neikvon",
@@ -15,12 +15,12 @@
     "create-nexus-type": "^1.1.7",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
-    "fbi": "next",
+    "fbi": "*",
     "prisma2": "2.0.0-preview023",
-    "ts-node": "^8.6.2",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "tslib": "^1.11.1",
-    "typescript": "^3.8.3"
+    "ts-node": "9.0.0",
+    "ts-node-dev": "1.0.0-pre.62",
+    "tslib": "^2.0.1",
+    "typescript": "^3.9.7"
   },
   "devDependencies": {
     "@types/node": "^13.7.6",

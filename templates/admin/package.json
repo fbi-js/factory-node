@@ -1,7 +1,7 @@
 {
-  "name": "@mrapi/admin",
-  "version": "1.0.0",
-  "description": "",
+  "name": "<%= project.name %>",
+  "version": "0.0.0",
+  "description": "<%= project.description %>",
   "main": "index.js",
   "files": [
     "bin",
@@ -36,12 +36,8 @@
     "@nexus/schema": "0.15.0"
   },
   "devDependencies": {
-    "tslib": "^2.0.1",
     "fs-extra": "9.0.1",
     "prettier": "2.0.5",
-    "typescript": "^3.9.6",
-    "ts-node-dev": "1.0.0-pre.51",
-    "ts-node": "9.0.0",
     "chalk": "^4.1.0"
   },
   "prettier": {

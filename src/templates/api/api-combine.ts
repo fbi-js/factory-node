@@ -1,13 +1,13 @@
 import { join } from 'path'
 import { Template } from 'fbi'
 import * as ejs from 'ejs'
-import Factory from '..'
+import Factory from '../..'
 import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
 
 export default class TemplateFactory extends Template {
-  id = 'api-basic'
-  description = 'template for api-basic'
-  path = 'templates/api-basic'
+  id = 'api-combine'
+  description = 'template for api-combine'
+  path = 'templates/api-combine'
   renderer = ejs.render
   templates = []
 
@@ -52,7 +52,15 @@ export default class TemplateFactory extends Template {
     // const { project } = this.data
     // if (project.features.vue) {
     this.files = {
-      copy: ['config/*', 'src/*', '.gitignore', '.meshrc.js', 'README.md', 'tsconfig.json'],
+      copy: [
+        'config/*',
+        'prisma/*',
+        'src/*',
+        '.gitignore',
+        '.meshrc.js',
+        'README.md',
+        'tsconfig.json'
+      ],
       render: ['package.json', '.fbi.config.js'],
       renderOptions: {
         async: true
