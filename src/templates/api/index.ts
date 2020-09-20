@@ -12,7 +12,7 @@ export default class TemplateWeb extends Template {
   renderer = ejs.render
   templates = [new SubTemplateBasic(this.factory), new SubTemplateCombine(this.factory)]
 
-  public projectInfo:Record<string | number, any> = {}
+  public projectInfo: Record<string | number, any> = {}
 
   constructor(public factory: Factory) {
     super()
@@ -66,8 +66,8 @@ export default class TemplateWeb extends Template {
     }
 
     const temps = utils.flatten(this.factory.templates.map((f: any) => f.templates))
-    const choiceId = project.features.standalone ? 'api-basic' :'api-combine'
-    const choiseTemp = temps.find((it:any) => it.id === choiceId)
+    const choiceId = project.features.standalone ? 'api-basic' : 'api-combine'
+    const choiseTemp = temps.find((it: any) => it.id === choiceId)
 
     if (choiseTemp) {
       // set init data
@@ -78,7 +78,7 @@ export default class TemplateWeb extends Template {
             id: factoryInfo.id,
             path: factoryInfo.version?.latest?.dir || factoryInfo.path,
             version: factoryInfo.version?.latest?.short,
-            template: choiseTemp.factory.id
+            template: choiceId
           }
         },
         flags
