@@ -8,9 +8,9 @@ import TemplateAdmin from './templates/admin';
 import TemplateApi from './templates/api/index';
 import TemplateDalBasic from './templates/dal-basic';
 export default class FactoryNode extends Factory {
-    id: string;
-    description: string;
-    commands: (CommandBuild | CommandServe | CommandDb | CommandGenerate)[];
-    templates: (TemplateGraphql | TemplateAdmin | TemplateApi | TemplateDalBasic)[];
-    execOpts: any;
+  id: string;
+  description: string;
+  commands: (CommandBuild | CommandServe | CommandDb | CommandGenerate)[];
+  templates: (TemplateGraphql | TemplateAdmin | TemplateApi | TemplateDalBasic)[];
+  execOpts: any;
 }
