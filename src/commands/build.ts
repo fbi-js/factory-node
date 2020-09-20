@@ -38,6 +38,7 @@ export default class CommandBuild extends Command {
     const distDirName = tsconifg?.compilerOptions?.outDir || 'dist'
     const distDir = join(_cwd, distDirName)
     // const srcDir = join(_cwd, tsconifg.compilerOptions.rootDir||'src')
+    const template = this.context.get('config.factory.template')
 
     this.logStart(`Start building:`)
     this.logItem(`remove '${distDirName}'...`)
@@ -48,29 +49,36 @@ export default class CommandBuild extends Command {
       stdio: flags.debug ? 'inherit' : 'pipe'
     }
 
-    this.logItem('generate prisma client files...')
-    await this.exec.command('prisma2 generate', execOpts)
-    this.logItem('compile ts files...')
-    await this.exec.command('tsc', execOpts)
+    // this.logItem('generate prisma client files...')
+    // await this.exec.command('prisma2 generate', execOpts)
 
-    if (flags.devDependencies) {
-      const pkg = require(join(_cwd, 'package.json'))
-      const ver = this.factory.version ? `#${this.factory.version}` : ''
-      pkg['devDependencies'] = utils.merge(pkg['devDependencies'], {
-        [this.factory.id]: `github:fbi-js/${this.factory.id}${ver}`,
-        fbi: '^4.0.0-alpha.1'
-      })
-
-      this.logItem('generate package.json...')
-      await this.fs.writeFile(join(distDir, 'package.json'), JSON.stringify(pkg, null, 2))
-      this.logItem('copy .fbi.config.js...')
-      await this.fs.copy(join(_cwd, '.fbi.config.js'), join(distDir, '.fbi.config.js'))
-
-      if (features?.prisma) {
-        this.logItem('copy prisma folder...')
-        await this.fs.copy(join(_cwd, 'prisma'), join(distDir, 'prisma'))
-      }
+    try {
+      this.clear()
+      this.logItem('compile ts files...')
+      if (!!~template.indexOf('dal')) await this.exec.command('npm run generate', execOpts)
+      await this.exec.command('tsc', execOpts)
+    } catch (err) {
+      this.error('Failed to build')
+      this.error(err).exit()
     }
+    // if (flags.devDependencies) {
+    //   const pkg = require(join(_cwd, 'package.json'))
+    //   const ver = this.factory.version ? `#${this.factory.version}` : ''
+    //   pkg['devDependencies'] = utils.merge(pkg['devDependencies'], {
+    //     [this.factory.id]: `github:fbi-js/${this.factory.id}${ver}`,
+    //     fbi: '^4.0.0-alpha.1'
+    //   })
+
+    //   this.logItem('generate package.json...')
+    //   await this.fs.writeFile(join(distDir, 'package.json'), JSON.stringify(pkg, null, 2))
+    //   this.logItem('copy .fbi.config.js...')
+    //   await this.fs.copy(join(_cwd, '.fbi.config.js'), join(distDir, '.fbi.config.js'))
+
+    //   if (features?.prisma) {
+    //     this.logItem('copy prisma folder...')
+    //     await this.fs.copy(join(_cwd, 'prisma'), join(distDir, 'prisma'))
+    //   }
+    // }
     this.logEnd('Build successfully')
   }
 }

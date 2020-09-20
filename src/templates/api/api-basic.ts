@@ -1,13 +1,13 @@
 import { join } from 'path'
 import { Template } from 'fbi'
 import * as ejs from 'ejs'
-import Factory from '..'
+import Factory from '../..'
 import { formatName, capitalizeEveryWord, isValidObject } from 'fbi/lib/utils'
 
 export default class TemplateFactory extends Template {
-  id = 'api-combine'
-  description = 'template for api-combine'
-  path = 'templates/api-combine'
+  id = 'api-basic'
+  description = 'template for api-basic'
+  path = 'templates/api/api-basic'
   renderer = ejs.render
   templates = []
 
@@ -16,28 +16,8 @@ export default class TemplateFactory extends Template {
   }
 
   protected async gathering() {
-    this.data.project = await this.prompt([
-      {
-        type: 'input',
-        name: 'name',
-        message: 'Input the project name',
-        initial({ enquirer }: any) {
-          return 'project-demo'
-        },
-        validate(value: any) {
-          const name = formatName(value)
-          return (name && true) || 'please input a valid project name'
-        }
-      },
-      {
-        type: 'input',
-        name: 'description',
-        message: 'Input project description',
-        initial({ state }: any) {
-          return `${state.answers.name} description`
-        }
-      }
-    ] as any)
+    // 获取暂存的项目参数
+    this.data.project = this.configStore.get('projectInfo')
 
     const { factory, project } = this.data
     project.features = []
@@ -52,15 +32,7 @@ export default class TemplateFactory extends Template {
     // const { project } = this.data
     // if (project.features.vue) {
     this.files = {
-      copy: [
-        'config/*',
-        'prisma/*',
-        'src/*',
-        '.gitignore',
-        '.meshrc.js',
-        'README.md',
-        'tsconfig.json'
-      ],
+      copy: ['config/*', 'src/*', '.gitignore', '.meshrc.js', 'README.md', 'tsconfig.json'],
       render: ['package.json', '.fbi.config.js'],
       renderOptions: {
         async: true
@@ -104,10 +76,10 @@ Next steps:
   $ ${this.style.cyan('cd ' + project.name)}
   `)
     console.log(`
-  $ ${this.style.cyan('npm run dev')} ${this.style.dim('launch the serve')}`)
+  $ ${this.style.cyan('fbi s')} ${this.style.dim('launch the serve')}`)
 
     console.log(`
-  $ ${this.style.cyan('npm run  build')} ${this.style.dim('build project')}`)
+  $ ${this.style.cyan('fbi b')} ${this.style.dim('build project')}`)
 
     //   console.log(`
     // $ ${this.style.cyan('fbi-next list')} ${this.style.dim(

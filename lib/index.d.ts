@@ -5,13 +5,12 @@ import CommandDb from './commands/db';
 import CommandGenerate from './commands/generate';
 import TemplateGraphql from './templates/graphql';
 import TemplateAdmin from './templates/admin';
-import TemplateApiBasic from './templates/api-basic';
-import TemplateApiCombine from './templates/api-combine';
+import TemplateApi from './templates/api/index';
 import TemplateDalBasic from './templates/dal-basic';
 export default class FactoryNode extends Factory {
-    id: string;
-    description: string;
-    commands: (CommandServe | CommandDb | CommandGenerate | CommandBuild)[];
-    templates: (TemplateGraphql | TemplateAdmin | TemplateApiBasic | TemplateApiCombine | TemplateDalBasic)[];
-    execOpts: any;
+  id: string;
+  description: string;
+  commands: (CommandBuild | CommandServe | CommandDb | CommandGenerate)[];
+  templates: (TemplateGraphql | TemplateAdmin | TemplateApi | TemplateDalBasic)[];
+  execOpts: any;
 }

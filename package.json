@@ -5,8 +5,8 @@
   "private": true,
   "main": "lib/index.js",
   "scripts": {
-    "build": "fbi b",
-    "watch": "fbi w"
+    "build": "rm -rf lib && tsc -p .",
+    "watch": "npm run build && tsc --watch"
   },
   "keywords": [],
   "author": "shaw @neikvon",

@@ -15,7 +15,7 @@ exports.default = {
       sources: [
         {
           name: 'auth',
-          endpoint: 'http://localhost:4003/graphql', // should be replaced
+          endpoint: 'http://106.52.61.221:30141/graphql', // should be replaced
           prefix: 'auth_',
           snapshot: false,
         },

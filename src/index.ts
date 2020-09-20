@@ -6,8 +6,7 @@ import CommandDb from './commands/db'
 import CommandGenerate from './commands/generate'
 import TemplateGraphql from './templates/graphql'
 import TemplateAdmin from './templates/admin'
-import TemplateApiBasic from './templates/api-basic'
-import TemplateApiCombine from './templates/api-combine'
+import TemplateApi from './templates/api/index'
 import TemplateDalBasic from './templates/dal-basic'
 // @ts-ignore
 import { version } from '../package.json'
@@ -24,8 +23,7 @@ export default class FactoryNode extends Factory {
   templates = [
     new TemplateGraphql(this),
     new TemplateAdmin(this),
-    new TemplateApiBasic(this),
-    new TemplateApiCombine(this),
+    new TemplateApi(this),
     new TemplateDalBasic(this)
   ]
 
