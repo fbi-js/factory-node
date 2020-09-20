@@ -11,7 +11,7 @@ import TemplateDalBasic from './templates/dal-basic';
 export default class FactoryNode extends Factory {
     id: string;
     description: string;
-    commands: (CommandBuild | CommandServe | CommandDb | CommandGenerate)[];
+    commands: (CommandServe | CommandDb | CommandGenerate | CommandBuild)[];
     templates: (TemplateGraphql | TemplateAdmin | TemplateApiBasic | TemplateApiCombine | TemplateDalBasic)[];
     execOpts: any;
 }
