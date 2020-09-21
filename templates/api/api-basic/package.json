@@ -5,24 +5,15 @@
   "main": "/lib/index.js",
   "scripts": {
     "dev": "fbi s",
-    "debug": "cross-env ts-node-dev --inspect --respawn --transpile-only --ignore-watch /.meshrc.js ./src/app.ts",
+    "debug": "fbi s -d",
     "prod": "cross-env NODE_ENV=production node dist/app",
     "build": "tsc",
-    "clean": "rm -rf dist",
-    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
-    "generate:prisma": "prisma generate",
-    "generate:nexus": "ts-node-dev --transpile-only src/nexus-schema"
+    "clean": "rm -rf dist"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@mrapi/api": "^1.0.0",
     "cross-env": "^7.0.2"
-  },
-  "prettier": {
-    "semi": false,
-    "tabWidth": 2,
-    "singleQuote": true,
-    "trailingComma": "all"
   }
 }

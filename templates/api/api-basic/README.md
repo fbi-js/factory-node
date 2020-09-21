@@ -1,11 +1,5 @@
 # 说明
 
-## TODO LIST
-
-...
-
-## 验证方式
-
 ### 运行
 
 - change the config file `config/mrapi.config.js` to the valid value
@@ -51,6 +45,7 @@ exports.default = {
       sources: [
         {
           name: 'auth',
+          type: 'graphql',
           endpoint: 'http://localhost:4003/graphql', // should be replaced
           prefix: 'auth_',
           snapshot: false,

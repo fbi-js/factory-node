@@ -1,4 +1,21 @@
-exports.default = {
+const { merge } = require('@mrapi/common')
+const util = require('util')
+
+// 加载对应环境配置文件
+const env = process.env.CUSTOM_ENV
+let envConfig = {}
+try {
+  if (env) {
+    console.log(`[Config] loading ${env} config`)
+    let customConfig = require(`./config.${env}`)
+    if (customConfig?.default) customConfig = customConfig.default
+    envConfig = customConfig || {}
+  }
+} catch (err) {
+  console.error(err)
+}
+
+let config = {
   api: {
     server: {
       port: 1358, // default
@@ -23,3 +40,14 @@ exports.default = {
     },
   },
 }
+
+// exports.default = merge(config, envConfig)
+
+config = merge(config, envConfig)
+console.log(`
+~~~~~~~~~~Config Start~~~~~~~~~~~~~~~
+${util.inspect(config, { compact: true })}
+~~~~~~~~~~~~~~~~~~~~~~~~~
+`)
+
+exports.default = config

@@ -22,8 +22,7 @@ export default class TemplateFactory extends Template {
     const { factory, project } = this.data
     project.features = []
     this.spinner = this.createSpinner(`Creating project...`).start(
-      `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
-        factory.template
+      `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${factory.template
       }...`
     )
   }
@@ -32,7 +31,7 @@ export default class TemplateFactory extends Template {
     // const { project } = this.data
     // if (project.features.vue) {
     this.files = {
-      copy: ['config/*', 'src/*', '.gitignore', '.meshrc.js', 'README.md', 'tsconfig.json'],
+      copy: ['config/*', 'src/*', '.gitignore', '.meshrc.js', 'README.md', 'tsconfig.json', '.eslintrc.js', '.prettierrc.js', '规范.md'],
       render: ['package.json', '.fbi.config.js'],
       renderOptions: {
         async: true
