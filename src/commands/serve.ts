@@ -17,7 +17,6 @@ export default class CommandServe extends Command {
 
   public async run(flags: any, unknown: any) {
     process.env.NODE_ENV = flags.mode ?? 'development'
-
     this.debug(
       `Factory: (${this.factory.id})`,
       'from command',
@@ -33,13 +32,11 @@ export default class CommandServe extends Command {
       ...this.factory.execOpts,
       stdio: 'inherit'
     }
-
     try {
       this.clear()
       await this.exec.command(
-        `ts-node-dev --clear --respawn --prefer-ts --transpile-only${
-          flags.debug ? ' --debug' : ''
-        } src/app.ts`,
+        `ts-node-dev  --clear --respawn --prefer-ts --transpile-only${flags.debug ? ' --debug' : ''
+        } --ignore-watch .meshrc.js ./src/app.ts`,
         execOpts
       )
     } catch (err) {
