@@ -8,7 +8,7 @@ try {
   if (env) {
     console.log(`[Config] loading ${env} config`)
     let customConfig = require(`./config.${env}`)
-    if (customConfig?.default) customConfig = customConfig.default
+    if (customConfig && customConfig.default) customConfig = customConfig.default
     envConfig = customConfig || {}
   }
 } catch (err) {
