@@ -12,7 +12,7 @@
     "view_dist"
   ],
   "scripts": {
-    "dev": "ts-node  --transpile-only ./src/app.ts",
+    "dev": "fbi s",
     "start": "cross-env NODE_ENV=production node dist/app",
     "clean": "rm -rf dist && rm -rf node_modules",
     "build": "tsc",

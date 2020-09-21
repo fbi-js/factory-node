@@ -4,7 +4,7 @@
   "description": "<%= project.description %>",
   "main": "/lib/index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch /.meshrc.js ./src/app.ts",
+    "dev": "fbi s",
     "debug": "cross-env ts-node-dev --inspect --respawn --transpile-only --ignore-watch /.meshrc.js ./src/app.ts",
     "prod": "cross-env NODE_ENV=production node dist/app",
     "build": "tsc",

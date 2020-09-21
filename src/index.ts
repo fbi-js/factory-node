@@ -21,7 +21,7 @@ export default class FactoryNode extends Factory {
     new CommandGenerate(this)
   ]
   templates = [
-    new TemplateGraphql(this),
+    // new TemplateGraphql(this),
     new TemplateAdmin(this),
     new TemplateApi(this),
     new TemplateDalBasic(this)
