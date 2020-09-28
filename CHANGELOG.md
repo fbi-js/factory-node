@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/fbi-js/factory-node/compare/v0.1.3...v0.2.0) (2020-09-28)
+
+
+### Features
+
+* 使用cnpm源 ([5e6b134](https://github.com/fbi-js/factory-node/commit/5e6b1340cb6e38041b2f78c7327c221582c234f0))
+* 添加一些api规范 ([d09915f](https://github.com/fbi-js/factory-node/commit/d09915f244c0666f79e272457d2de32b1f5da2c7))
+
+
+### Bug Fixes
+
+* config 报错修复 ([2d5abad](https://github.com/fbi-js/factory-node/commit/2d5abadf3d7372dcb84df29e87a29fa7abcbbaf3))
+
 ### [0.1.3](https://github.com/fbi-js/factory-node/compare/v0.1.2...v0.1.3) (2020-09-21)
 
 
