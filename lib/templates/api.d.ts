@@ -1,7 +1,7 @@
 import * as ejs from 'ejs';
 import { Template } from 'fbi';
 import Factory from '..';
-export default class TemplateAdmin extends Template {
+export default class TemplateApi extends Template {
     factory: Factory;
     id: string;
     description: string;

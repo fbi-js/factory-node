@@ -5,8 +5,9 @@
   "private": true,
   "main": "lib/index.js",
   "scripts": {
-    "build": "rm -rf lib && tsc -p .",
-    "watch": "npm run build && tsc --watch"
+    "build": "fbi b",
+    "watch": "fbi w",
+    "clean": "rm -rf lib"
   },
   "keywords": [],
   "author": "shaw @neikvon",
@@ -15,14 +16,13 @@
     "create-nexus-type": "^1.1.7",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
-    "fbi": "4.0.2",
+    "fbi": "~4",
     "ts-node": "^9.0.0",
-    "ts-node-dev": "1.0.0-pre.62",
-    "tslib": "^2.0.1",
-    "typescript": "^4.0.3"
+    "ts-node-dev": "1.0.0-pre.63",
+    "tslib": "^2.0.3"
   },
   "devDependencies": {
-    "@types/node": "^14.11.1",
+    "@types/node": "*",
     "@types/ejs": "^3.0.4"
   }
 }
