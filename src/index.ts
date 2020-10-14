@@ -1,15 +1,14 @@
 import { join } from 'path'
 import { Factory } from 'fbi'
+
 import CommandBuild from './commands/build'
 import CommandServe from './commands/serve'
 import CommandDb from './commands/db'
 import CommandGenerate from './commands/generate'
-import TemplateGraphql from './templates/graphql'
-import TemplateAdmin from './templates/admin'
-import TemplateApi from './templates/api/index'
-import TemplateDalBasic from './templates/dal-basic'
-// @ts-ignore
-import { version } from '../package.json'
+
+import TemplateDal from './templates/dal'
+import TemplateApi from './templates/api'
+// import TemplateAdmin from './templates/admin'
 
 export default class FactoryNode extends Factory {
   id = 'factory-node'
@@ -21,10 +20,9 @@ export default class FactoryNode extends Factory {
     new CommandGenerate(this)
   ]
   templates = [
-    // new TemplateGraphql(this),
-    new TemplateAdmin(this),
-    new TemplateApi(this),
-    new TemplateDalBasic(this)
+    new TemplateDal(this),
+    new TemplateApi(this)
+    //  new TemplateAdmin(this)
   ]
 
   execOpts: any = {

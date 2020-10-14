@@ -6,10 +6,10 @@ import Factory from '..'
 
 const { formatName, isValidObject } = utils
 
-export default class TemplateAdmin extends Template {
-  id = 'admin'
-  description = 'template for admin application of @mrapi/dal'
-  path = 'templates/admin'
+export default class TemplateApi extends Template {
+  id = 'api'
+  description = 'template for API application using @mrapi/api'
+  path = 'templates/api'
   renderer = ejs.render
   templates = []
 
@@ -24,7 +24,7 @@ export default class TemplateAdmin extends Template {
         name: 'name',
         message: 'Input the project name',
         initial({ enquirer }: any) {
-          return 'project-demo'
+          return 'my-api'
         },
         validate(value: any) {
           const name = formatName(value)
@@ -38,11 +38,20 @@ export default class TemplateAdmin extends Template {
         initial({ state }: any) {
           return `${state.answers.name} description`
         }
+      },
+      {
+        type: 'MultiSelect',
+        name: 'features',
+        message: `Choose features for your project:`,
+        hint: '(Use <space> to select, <return> to submit)',
+        choices: [{ name: 'combined', value: true }],
+        result(names: string[]) {
+          return this.map(names)
+        }
       }
     ] as any)
 
     const { factory, project } = this.data
-    project.features = []
     this.spinner = this.createSpinner(`Creating project...`).start(
       `Creating ${this.style.bold.green(project.name)} via ${factory.id} from ${
         factory.template
@@ -51,25 +60,26 @@ export default class TemplateAdmin extends Template {
   }
 
   protected async writing() {
-    // const { project } = this.data
-    // if (project.features.vue) {
+    const { project } = this.data
+    const debug = !!this.context.get('debug')
+    const isCombined = project.features['combined']
+
     this.files = {
       copy: [
-        'config/*',
-        'prisma/*',
-        'scripts/*',
-        'src/*',
-        'view/*',
+        ...(isCombined ? ['config/*', 'src/*.ts', 'src/graphql/*.ts', 'src/openapi/*'] : ['src/*']),
+        'src/*.ts',
+        'examples/*',
         '.gitignore',
         'README.md',
         'tsconfig.json'
       ],
-      render: ['package.json', '.fbi.config.js', 'README.md'],
+      render: ['package.json', '.fbi.config.js', 'mrapi.config.js'],
       renderOptions: {
-        async: true
+        async: true,
+        debug,
+        compileDebug: debug
       }
     }
-    // }
   }
 
   protected async installing(flags: Record<string, any>) {
@@ -80,12 +90,7 @@ export default class TemplateAdmin extends Template {
     if (isValidObject(dependencies) || isValidObject(devDependencies)) {
       const installSpinner = this.createSpinner(`Installing dependencies...`).start()
       try {
-        const packageManager = flags.packageManager || this.context.get('config').packageManager
-        const cmds = packageManager === 'yarn' ? [packageManager] : [packageManager, 'install']
-        this.debug(`\nrunning \`${cmds.join(' ')}\` in ${this.targetDir}`)
-        await this.exec(cmds[0], cmds.slice(1), {
-          cwd: this.targetDir
-        })
+        await this.installDeps(this.targetDir, flags.packageManager, false)
         installSpinner.succeed(`Installed dependencies`)
       } catch (err) {
         installSpinner.fail('Failed to install dependencies. You can install them manually.')
@@ -104,17 +109,24 @@ export default class TemplateAdmin extends Template {
 
     console.log(`
 Next steps:
-  $ ${this.style.cyan('cd ' + project.name)}
-  `)
+  $ ${this.style.cyan('cd ' + project.name)}`)
+
+    if (this.data.project.features['combined']) {
+      console.log(`
+  $ ${this.style.cyan('npm run generate')} ${this.style.dim(
+        'generate the files needed for the service'
+      )}`)
+
+      console.log(`
+  $ ${this.style.cyan('npm run migrate')} ${this.style.dim(
+        'migrate schema save or up to database'
+      )}`)
+    }
+
     console.log(`
   $ ${this.style.cyan('npm run dev')} ${this.style.dim('launch the serve')}`)
 
     console.log(`
   $ ${this.style.cyan('npm run  build')} ${this.style.dim('build project')}`)
-
-    //   console.log(`
-    // $ ${this.style.cyan('fbi-next list')} ${this.style.dim(
-    //     'show available commands and sub templates'
-    //   )}`)
   }
 }
