@@ -9,10 +9,15 @@
     "prod": "cross-env NODE_ENV=production node dist/src/app",
     "build": "rm -rf dist && npm run generate && tsc",
     "clean": "rm -rf dist && rm -rf node_modules",
+    <%_ if (project.features['multi-tenant']) { _%>
+    "generate": "npx mrapi generate --services management blog music",
+    "migrate": "npm run migrate:management && npm run migrate:services",
+    "migrate:management": "npx mrapi migrate --services management",
+    "migrate:services": "npx mrapi migrate --services blog music"
+    <%_ } else { _%>
     "generate": "npx mrapi generate --services default",
-    "migrate": "npx mrapi migrate --services default",
-    "dmmf": "ts-node-dev --respawn --transpile-only ./scripts/dmmf.ts",
-    "gen1-eqm": "npx mrapi generate --name one --eqm findOne,createOne --em Post"
+    "migrate": "npx mrapi migrate --services default"
+    <%_ } _%>
   },
   "author": "",
   "license": "ISC",

@@ -69,7 +69,6 @@ export default class TemplateDal extends Template {
         ...(isMultiTenant
           ? ['config/blog.prisma', 'config/music.prisma', 'config/management.prisma']
           : ['config/default.prisma']),
-        'scripts/*',
         'src/*',
         '.gitignore',
         'README.md',
