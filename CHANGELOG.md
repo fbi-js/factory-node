@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/fbi-js/factory-node/compare/v0.2.0...v1.1.0) (2020-10-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* mrapi version
+* true
+
+### Features
+
+* **dal:** update mrapi.config ([dbc3c7f](https://github.com/fbi-js/factory-node/commit/dbc3c7ff2fe89e63c77d0821dddcde778f76ce6c))
+
+
+### Code Refactoring
+
+* use mrapi 2.0 ([4840528](https://github.com/fbi-js/factory-node/commit/4840528267b9c3105344f19c8d58fc184ea13907))
+* use mrapi 2.0 ([a2bd26d](https://github.com/fbi-js/factory-node/commit/a2bd26d7ea379f8c9c4d33fb926a94f18e4ff9c1))
+
 ## [1.0.0](https://github.com/fbi-js/factory-node/compare/v0.1.3...v1.0.0) (2020-10-14)
 
 
