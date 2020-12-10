@@ -8,5 +8,5 @@ export default class CommandServe extends Command {
     args: string;
     flags: string[][];
     constructor(factory: Factory);
-    run(flags: any, unknown: any): Promise<void>;
+    run(file: string, flags: any, unknown: any): Promise<void>;
 }

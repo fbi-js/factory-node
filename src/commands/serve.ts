@@ -1,21 +1,20 @@
-// import { join } from 'path'
 import { Command } from 'fbi'
 import Factory from '..'
-// import * as dotenv from 'dotenv'
-import { loadEnv } from '../helpers/load-env'
 
 export default class CommandServe extends Command {
   id = 'serve'
   alias = 's'
   description = 'start development server'
-  args = ''
+  args = '<file>'
   flags = [['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development']]
 
   constructor(public factory: Factory) {
     super()
   }
 
-  public async run(flags: any, unknown: any) {
+  public async run(file: string, flags: any, unknown: any) {
+    console.log({ file, flags })
+
     process.env.NODE_ENV = flags.mode ?? 'development'
     this.debug(
       `Factory: (${this.factory.id})`,
@@ -35,8 +34,9 @@ export default class CommandServe extends Command {
     try {
       this.clear()
       await this.exec.command(
-        `ts-node-dev  --clear --respawn --prefer-ts --transpile-only${flags.debug ? ' --debug' : ''
-        } --ignore-watch .meshrc.js ./src/app.ts`,
+        `ts-node-dev --respawn --prefer-ts --transpile-only${
+          flags.debug ? ' --debug' : ''
+        } ${file}`,
         execOpts
       )
     } catch (err) {

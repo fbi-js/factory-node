@@ -6,9 +6,9 @@ import CommandServe from './commands/serve'
 import CommandDb from './commands/db'
 import CommandGenerate from './commands/generate'
 
-import TemplateDal from './templates/dal'
-import TemplateApi from './templates/api'
-// import TemplateAdmin from './templates/admin'
+import TemplateApp from './templates/app'
+import TemplateService from './templates/service'
+import TemplateGateway from './templates/gateway'
 
 export default class FactoryNode extends Factory {
   id = 'factory-node'
@@ -19,11 +19,7 @@ export default class FactoryNode extends Factory {
     new CommandDb(this),
     new CommandGenerate(this)
   ]
-  templates = [
-    new TemplateDal(this),
-    new TemplateApi(this)
-    //  new TemplateAdmin(this)
-  ]
+  templates = [new TemplateApp(this), new TemplateService(this), new TemplateGateway(this)]
 
   execOpts: any = {
     cwd: process.cwd(),
