@@ -51,7 +51,7 @@
   "fbi": {
     "factory": {
       "id": "<%= factory.id %>",
-      "version": "<%= factory.version %>",
+      "version": "",
       "template": "<%= factory.template %>",
       "features": <%- JSON.stringify(project.features) %>
     }
