@@ -58,7 +58,6 @@ export default class TemplateNodeBase extends Template {
     ] as any)
 
     this.data.project.features = this.data.project.features || {}
-    console.log(this.data.project.features)
   }
 
   protected async writing() {

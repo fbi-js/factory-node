@@ -13,8 +13,6 @@ export default class CommandServe extends Command {
   }
 
   public async run(file: string, flags: any, unknown: any) {
-    console.log({ file, flags })
-
     process.env.NODE_ENV = flags.mode ?? 'development'
     this.debug(
       `Factory: (${this.factory.id})`,
