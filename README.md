@@ -1,10 +1,14 @@
-# factory-node
-factory for fbi node.js application development
+# @fbi-js/factory-node
 
-> This is a factory for [fbi v4](https://github.com/fbi-js/fbi). If you haven't installed fbi yet, use the following command to install.
->
-> `$ npm i -g fbi`
+Templates and commands for node.js applications development.
 
+> This is a factory for [fbi v4](https://github.com/fbi-js/fbi)
+
+## Usage
+
+```bash
+npx fbi create factory-node
+```
 
 ## Requirements
 
@@ -13,40 +17,26 @@ factory for fbi node.js application development
 
 ## Templates
 
-- `api`: template for API project
-- `dal`: template for DAL project
-- `admin`: template for API Admin project
+- `app`: web application base on [@mrapi/app](https://github.com/mrapi-js/mrapi/blob/main/packages/app/README.md)
+- `service`: API service base on [@mrapi/service](https://github.com/mrapi-js/mrapi/blob/main/packages/service/README.md)
 
-## Commands
+  **Types**:
 
-- `serve`: start development server
+  - `Simple`: GraphQL/OpenAPI service using [@nexus/schema](https://github.com/graphql-nexus/schema)/[express-openapi](https://github.com/kogosoftwarellc/open-api/tree/master/packages/express-openapi)
+  - `Prisma`: GraphQL/OpenAPI service using [@nexus/schema](https://github.com/graphql-nexus/schema)/[express-openapi](https://github.com/kogosoftwarellc/open-api/tree/master/packages/express-openapi) and [Prisma](https://github.com/prisma/prisma) (including DB process service)
+  - `Aggregation`: GraphQL/OpenAPI aggregation service using [graphql-tools](https://github.com/ardatan/graphql-tools)
+- `gateway`: API gateway base on [@mrapi/gateway](https://github.com/mrapi-js/mrapi/blob/main/packages/gateway/README.md)
 
-  ```bash
-  fbi s
-  ```
+## Features
 
-- `build`: build for production
+- `Multiple modules`: One service can contain multiple modules, each module can have different endpoints, or can be merged by [GraphQL stitching](https://www.graphql-tools.com/docs/stitch-combining-schemas), [more info](https://github.com/mrapi-js/mrapi/blob/main/packages/service/README.md).
+- `Multiple tenants`: [IBM Docs](https://www.ibm.com/cloud/learn/multi-tenant). [more info](https://github.com/mrapi-js/mrapi/blob/main/packages/datasource/README.md)
 
-  ```bash
-  fbi b
-  ```
+## Contribution
 
+Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before making a pull request.
 
-## Usage
-
-**Install**
-
-```bash
-$ fbi add factory-node
-```
-
-**Run**
-
-```bash
-$ cd path/to/empty-folder
-$ fbi create
-```
-
+Thank you to all the people who already contributed to fbi factory!
 
 ## License
 
