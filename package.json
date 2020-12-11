@@ -5,26 +5,32 @@
   "private": true,
   "main": "lib/index.js",
   "scripts": {
-    "build": "fbi b",
-    "watch": "fbi w",
+    "dev": "fbi w",
+    "build": "npm run clean && fbi b",
     "clean": "rm -rf lib"
   },
   "keywords": [],
-  "author": "shaw @neikvon",
+  "author": "fbi",
   "license": "MIT",
   "dependencies": {
-    "create-nexus-type": "^1.1.7",
-    "dotenv": "^8.2.0",
+    "@types/node": "*",
     "ejs": "^3.1.5",
-    "fbi": "~4",
-    "ts-node": "^9.0.0",
-    "ts-node-dev": "1.0.0-pre.63",
-    "tslib": "^2.0.3",
-    "typescript": "^4.0.3",
-    "fbi-lint": "^0.0.3"
+    "ts-node": "^9.1.1",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^4.1.2"
   },
   "devDependencies": {
-    "@types/node": "*",
-    "@types/ejs": "^3.0.4"
+    "@fbi-js/factory-factory": "^1.0.1",
+    "@types/ejs": "^3.0.5"
+  },
+  "fbi": {
+    "factory": {
+      "id": "@fbi-js/factory-factory",
+      "version": "",
+      "template": "factory",
+      "features": {
+        "typescript": true
+      }
+    }
   }
 }
