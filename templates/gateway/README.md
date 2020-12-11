@@ -1,14 +1,25 @@
-# 说明
+# <%= project.name %>
 
-## TODO LIST
+<%= project.description %>
 
-...
+> This project is generated via&nbsp;[fbi](https://github.com/fbi-js/fbi)&nbsp; <%_ if (factory.url) { _%> [<%= factory.id %>](<%= factory.url %>) <%_ } else { _%> <%= factory.id %> <%_ } _%>&nbsp; template <%= factory.template %>
 
-### 运行
+## Dev
 
-```shell
-cd view
-npm run build
-cd ..
-npm run dev
-```
+- Install Dependencies
+
+  ```bash
+  yarn # or npm install
+  ```
+
+- Start Dev Server
+
+  ```bash
+  yarn dev
+  ```
+
+- Build for production
+
+  ```bash
+  yarn build
+  ```

@@ -1,7 +1,7 @@
-import { extendType, objectType<%_ if (!project.features.prisma) { _%>, arg, list<%_ } _%> } from '@nexus/schema'
+import { extendType<%_ if (project.features.type != 'prisma') { _%>, objectType<%_ } else { _%>, arg, list<%_ } _%> } from '@nexus/schema'
 import { Context } from '../context'
+<%_ if (project.features.type != 'prisma') { _%>
 
-<%_ if (!project.features.prisma) { _%>
 const Post = objectType({
   name: 'Post',
   definition(t) {
@@ -14,20 +14,7 @@ const Post = objectType({
 export const customQuery = extendType({
   type: 'Query',
   definition(t) {
-    <%_ if (project.features.prisma) { _%>
-    t.nullable.field('me', {
-      type: 'User',
-      description: 'Get current user info',
-      async resolve(_root, _args, ctx: Context, _info) {
-        console.log('me', ctx.req.headers, ctx.userId)
-        return ctx.prisma.user.findUnique({
-          where: {
-            id: ctx.userId,
-          },
-        })
-      },
-    })
-
+    <%_ if (project.features.type == 'prisma') { _%>
     t.list.field('drafts', {
       type: 'Post',
       description: 'Get unpublished posts',

@@ -6,10 +6,17 @@ export default class TemplateService extends BaseClass {
     path: string;
     description: string;
     templates: never[];
-    features: {
+    choices: {
         name: string;
-        value: boolean;
+        value: string;
+        hint: string;
+        children: {
+            name: string;
+            value: boolean;
+            hint: string;
+        }[];
     }[];
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
+    protected writing(): Promise<void>;
 }

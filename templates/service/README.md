@@ -12,6 +12,12 @@
   yarn # or npm install
   ```
 
+- Setup
+
+  ```bash
+  yarn setup
+  ```
+
 - Start Dev Server
 
   ```bash

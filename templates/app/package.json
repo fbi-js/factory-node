@@ -7,7 +7,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "dev": "fbi serve ./src/app.ts",
-    "build": "fbi build"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "fbi",

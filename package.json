@@ -25,7 +25,7 @@
   },
   "fbi": {
     "factory": {
-      "id": "factory-factory",
+      "id": "@fbi-js/factory-factory",
       "version": "",
       "template": "factory",
       "features": {

@@ -58,6 +58,7 @@ export default class TemplateNodeBase extends Template {
     ] as any)
 
     this.data.project.features = this.data.project.features || {}
+    console.log(this.data.project.features)
   }
 
   protected async writing() {
@@ -115,10 +116,15 @@ export default class TemplateNodeBase extends Template {
 Next steps:
   $ ${this.style.cyan('cd ' + project.name)}`)
 
-    console.log(`
-  $ ${this.style.cyan('npm run dev')} ${this.style.dim('launch the serve')}`)
+    if (this.id === 'service') {
+      console.log(`
+  $ ${this.style.cyan('yarn setup')}`)
+    }
 
     console.log(`
-  $ ${this.style.cyan('npm run build')} ${this.style.dim('build project')}`)
+  $ ${this.style.cyan('yarn dev')} ${this.style.dim('launch the serve')}`)
+
+    console.log(`
+  $ ${this.style.cyan('yarn build')} ${this.style.dim('build project')}`)
   }
 }

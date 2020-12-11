@@ -1,6 +1,7 @@
-dist/
+lib/
 
 .DS_Store
 *-debug.log
 *-error.log
 node_modules/
+tsconfig.tsbuildinfo
