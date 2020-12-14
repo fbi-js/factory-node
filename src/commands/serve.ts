@@ -4,7 +4,7 @@ import Factory from '..'
 export default class CommandServe extends Command {
   id = 'serve'
   alias = 's'
-  description = 'start development server'
+  description = 'launch the development server'
   args = '<file>'
   flags = [['-m, --mode <mode>', 'specify env mode(development|production|testing)', 'development']]
 

@@ -112,8 +112,12 @@ export default class TemplateNodeBase extends Template {
     }
 
     console.log(`
-Next steps:
+Next steps:`)
+
+    if (this.data.subDirectory) {
+      console.log(`
   $ ${this.style.cyan('cd ' + project.name)}`)
+    }
 
     if (this.id === 'service') {
       console.log(`
@@ -121,9 +125,10 @@ Next steps:
     }
 
     console.log(`
-  $ ${this.style.cyan('yarn dev')} ${this.style.dim('launch the serve')}`)
+  $ ${this.style.cyan('yarn dev')} ${this.style.dim('launch the development server')}`)
 
     console.log(`
-  $ ${this.style.cyan('yarn build')} ${this.style.dim('build project')}`)
+  $ ${this.style.cyan('yarn build')} ${this.style.dim('build project for production')}
+  `)
   }
 }
