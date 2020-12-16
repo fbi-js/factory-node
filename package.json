@@ -1,6 +1,6 @@
 {
   "name": "@fbi-js/factory-node",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "factory for node.js application development",
   "main": "lib/index.js",
   "files": [
