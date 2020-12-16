@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.6](https://github.com/fbi-js/factory-node/compare/v2.0.5...v2.0.6) (2020-12-16)
+
+
+### Bug Fixes
+
+* expose template & command class ([2e9babe](https://github.com/fbi-js/factory-node/commit/2e9babe0c6b95aab04cab34dae530d95813dc313))
+
 ### [2.0.5](https://github.com/fbi-js/factory-node/compare/v2.0.4...v2.0.5) (2020-12-16)
 
 
