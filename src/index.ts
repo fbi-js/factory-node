@@ -8,7 +8,7 @@ import TemplateService from './templates/service'
 import TemplateGateway from './templates/gateway'
 
 export default class FactoryNode extends Factory {
-  id = 'factory-node'
+  id = '@fbi-js/factory-node'
   description = 'factory for node.js application development'
   commands = [new CommandServe(this)]
   templates = [new TemplateApp(this), new TemplateService(this), new TemplateGateway(this)]
