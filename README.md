@@ -32,6 +32,39 @@ npx fbi create factory-node
 - `Multiple modules`: One service can contain multiple modules, each module can have different endpoints, or can be merged by [GraphQL stitching](https://www.graphql-tools.com/docs/stitch-combining-schemas), [more info](https://github.com/mrapi-js/mrapi/blob/main/packages/service/README.md).
 - `Multiple tenants`: [IBM Docs](https://www.ibm.com/cloud/learn/multi-tenant). [more info](https://github.com/mrapi-js/mrapi/blob/main/packages/datasource/README.md)
 
+## Development
+
+Build your own `factory-node` based on `@fbi-js/factory-node`,
+
+```bash
+# create a project
+npx fbi create @fbi-js/factory-factory
+
+npm i @fbi-js/factory-node
+```
+
+```ts
+// src/index.ts
+
+import FactoryNodeBase from '@fbi-js/factory-node'
+
+import CommandX from './commands/my-command'
+import TemplateX from './templates/my-template'
+
+const { name, description } = require('../package.json')
+
+export default class FactoryNode extends FactoryNodeBase {
+  id = name
+  description = description
+  commands = [
+    new CommandX(this),
+  ]
+  templates = [
+    new TemplateX(this),
+  ]
+}
+```
+
 ## Contribution
 
 Please make sure to read the [Contributing Guide](./CONTRIBUTING.md) before making a pull request.

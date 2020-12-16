@@ -1,11 +1,12 @@
 import { Factory } from 'fbi';
 import CommandServe from './commands/serve';
+import TemplateBase from './templates/base';
 import TemplateApp from './templates/app';
 import TemplateService from './templates/service';
 import TemplateGateway from './templates/gateway';
 export default class FactoryNode extends Factory {
-    id: string;
-    description: string;
+    id: any;
+    description: any;
     commands: CommandServe[];
     templates: (TemplateApp | TemplateService | TemplateGateway)[];
     execOpts: {
@@ -14,3 +15,4 @@ export default class FactoryNode extends Factory {
         preferLocal: boolean;
     };
 }
+export { CommandServe, TemplateBase, TemplateApp, TemplateService, TemplateGateway };
