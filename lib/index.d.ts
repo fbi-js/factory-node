@@ -1,4 +1,4 @@
-import { Factory } from 'fbi';
+import { Factory, Command, Template } from 'fbi';
 import CommandServe from './commands/serve';
 import TemplateBase from './templates/base';
 import TemplateApp from './templates/app';
@@ -7,8 +7,8 @@ import TemplateGateway from './templates/gateway';
 export default class FactoryNode extends Factory {
     id: any;
     description: any;
-    commands: CommandServe[];
-    templates: (TemplateApp | TemplateService | TemplateGateway)[];
+    commands: Command[];
+    templates: Template[];
     execOpts: {
         cwd: string;
         localDir: string;

@@ -1,3 +1,4 @@
+import { join } from 'path'
 import Factory from '..'
 import BaseClass from './base'
 
@@ -16,7 +17,7 @@ const commonFeatures = [
 
 export default class TemplateService extends BaseClass {
   id = 'service'
-  path = 'templates/service'
+  path = join(__dirname, '../../templates/service')
   description = 'template for API service'
   templates = []
   choices = [

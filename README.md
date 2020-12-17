@@ -1,4 +1,4 @@
-# @fbi-js/factory-node
+# factory-node
 
 Templates and commands for node.js applications development.
 
@@ -12,7 +12,6 @@ npx fbi create factory-node
 
 ## Requirements
 
-- `fbi v4+`
 - `node v10+`
 
 ## Templates
@@ -36,12 +35,15 @@ npx fbi create factory-node
 
 Build your own `factory-node` based on `@fbi-js/factory-node`,
 
+Create a project
+
 ```bash
-# create a project
 npx fbi create @fbi-js/factory-factory
 
 npm i @fbi-js/factory-node
 ```
+
+Create and modify files
 
 ```ts
 // src/index.ts
@@ -56,14 +58,38 @@ const { name, description } = require('../package.json')
 export default class FactoryNode extends FactoryNodeBase {
   id = name
   description = description
-  commands = [
-    new CommandX(this),
-  ]
-  templates = [
-    new TemplateX(this),
-  ]
+
+  // 1. replace default commands
+  commands = [new CommandX(this)]
+  templates = [new TemplateX(this)]
+
+  constructor() {
+    super()
+
+    // 2. OR: extends default commands
+    // this.commands.push(new CommandX(this))
+    // this.templates.push(new TemplateX(this))
+  }
 }
 ```
+
+Compile ts files
+
+```bash
+yarn build
+```
+
+Test
+
+```bash
+fbi link
+```
+
+```bash
+fbi create
+```
+
+## [Changelog](./CHANGELOG.md)
 
 ## Contribution
 

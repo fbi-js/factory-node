@@ -116,7 +116,7 @@ Next steps:`)
 
     if (this.data.subDirectory) {
       console.log(`
-  $ ${this.style.cyan('cd ' + project.name)}`)
+  $ ${this.style.cyan('cd ' + this.data.subDirectory)}`)
     }
 
     if (this.id === 'service') {
