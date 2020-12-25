@@ -13,6 +13,7 @@ npx fbi create factory-node
 ## Requirements
 
 - `node v10+`
+- `fbi v4.3.2+`
 
 ## Templates
 
