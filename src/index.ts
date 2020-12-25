@@ -7,6 +7,7 @@ import TemplateBase from './templates/base'
 import TemplateApp from './templates/app'
 import TemplateService from './templates/service'
 import TemplateGateway from './templates/gateway'
+import TemplateMonorepo from './templates/monorepo'
 
 const { name, description } = require('../package.json')
 
@@ -17,7 +18,8 @@ export default class FactoryNode extends Factory {
   templates: Template[] = [
     new TemplateApp(this),
     new TemplateService(this),
-    new TemplateGateway(this)
+    new TemplateGateway(this),
+    new TemplateMonorepo(this)
   ]
 
   execOpts = {

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "module": "commonjs",
+    "removeComments": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "target": "es2017",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "noImplicitThis": false,
+    "resolveJsonModule": true,
+    "allowJs": true,
+
+    "incremental": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["packages", "scripts", "typings/**/*.ts"],
+  "exclude": ["node_modules", "./**/*/tests/**/", "benchmarks", "./**/*/lib/"]
+}

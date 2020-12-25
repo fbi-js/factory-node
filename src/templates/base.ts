@@ -12,7 +12,7 @@ export default class TemplateNodeBase extends Template {
   features: any[] = []
 
   constructor(public factory: Factory) {
-    super()
+    super(factory)
   }
 
   protected async gathering(flags: Record<string, any>) {
