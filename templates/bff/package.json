@@ -1,5 +1,5 @@
 {
-  "name": "gateway-basic",
+  "name": "bff-basic",
   "version": "1.0.0",
   "private": "true",
   "description": "",
@@ -11,7 +11,7 @@
     "start": "node dist/app"
   },
   "keywords": [],
-  "author": "neikvon",
+  "author": "llleoli",
   "license": "MIT",
   "dependencies": {
     "@mrapi/gateway": "1.0.0-beta.1",
