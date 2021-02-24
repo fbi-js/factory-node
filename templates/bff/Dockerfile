@@ -1,4 +1,4 @@
-FROM wii-docker.pkg.coding.net/wenlvyunkaifangpingtai/wenlvyunkaifangpingtai/node:14.15.0
+FROM node:14.15.0
 
 WORKDIR /usr/src/app
 
