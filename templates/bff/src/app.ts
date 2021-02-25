@@ -5,15 +5,15 @@ import mock from './mockService'
 import routes from './routes'
 import middlewares from './middlewares'
 import initProxy from './helpers/initProxy'
-import { CApp } from './types'
-const { port = 3001 } = require('../config')
+const { port = 3001 } = require('../mrapi.config')
 
 // mock service
 mock()
 
 // init gateway
-const app: CApp = new Gateway({
+const app = new Gateway({
   app: {},
+  clients: true,
   services: []
 })
 export { app }
@@ -25,7 +25,6 @@ routes()
 
 // add proxys
 initProxy()
-
 app
   .start(port)
   .then((address: any) => {

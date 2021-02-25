@@ -4,9 +4,9 @@ import { CRoute } from '../types'
 export default <Array<CRoute>> [{
   url: '/server-time',
   method: 'GET',
-  handler(_req, res) {
+  async handler (_req, res) {
     // request use service name
-    app.clients?.service.get('/')
-    res.end(new Date().toString())
+    const resp = await app.clients.service.get('/')
+    res.end(new Date().toString() + resp.data)
   }
 }]

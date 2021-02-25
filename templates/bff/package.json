@@ -14,8 +14,7 @@
   "author": "llleoli",
   "license": "MIT",
   "dependencies": {
-    "@mrapi/gateway": "1.0.0-beta.1",
-    "axios": "^0.21.1"
+    "@mrapi/gateway": "1.0.0-beta.3"
   },
   "devDependencies": {
     "@types/node": "*",
