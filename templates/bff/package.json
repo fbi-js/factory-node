@@ -1,0 +1,30 @@
+{
+  "name": "bff-basic",
+  "version": "1.0.0",
+  "private": "true",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app"
+  },
+  "keywords": [],
+  "author": "llleoli",
+  "license": "MIT",
+  "dependencies": {
+    "@mrapi/gateway": "1.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@types/node": "*",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "4.0.5"
+  },
+  "prettier": {
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
