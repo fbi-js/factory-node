@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/fbi-js/factory-node/compare/v2.1.0...v2.2.0) (2021-03-01)
+
+
+### Features
+
+* bff template ([a64767c](https://github.com/fbi-js/factory-node/commit/a64767ca45f3e9cc0fb06346313e04b63d7bbc3e))
+* update dependencies version & fix create template error ([189623c](https://github.com/fbi-js/factory-node/commit/189623cc60a3cf2fa4b3ee1330fc50d3195d2c27))
+* use mrapi config ([85d2993](https://github.com/fbi-js/factory-node/commit/85d2993c2d9b24051f63f0655e7df972f5985f59))
+
+
+### Bug Fixes
+
+* package.json info ([295f8f7](https://github.com/fbi-js/factory-node/commit/295f8f7a01ed5f10a8a16b0e552713ca0eea754e))
+* use public node image ([f2ddf5f](https://github.com/fbi-js/factory-node/commit/f2ddf5fa5c0ff7e51ed8f95887efdd939d0f6615))
+
 ## [2.1.0](https://github.com/fbi-js/factory-node/compare/v2.0.7...v2.1.0) (2020-12-25)
 
 
