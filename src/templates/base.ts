@@ -11,6 +11,15 @@ export default class TemplateNodeBase extends Template {
   id = 'node-base'
   renderer = ejs.render
   features: any[] = []
+  path = ''
+  rule = {
+    glob: '**/*',
+    ignores: [] // examples: '**/app.ts'
+  }
+
+  get globPath() {
+    return `${this.path}/${this.rule.glob}`
+  }
 
   constructor(public factory: Factory) {
     super(factory)
@@ -61,50 +70,6 @@ export default class TemplateNodeBase extends Template {
     this.data.project.features = this.data.project.features || {}
   }
 
-  // protected async writing() {
-  //   const debug = !!this.context.get('debug')
-  //   const isJs = this.data.project?.features?.javascript
-
-  //   this.files = {
-  //     copy: ['.gitignore', '.editorconfig', '.prettierignore', isJs ? '' : 'tsconfig.json'].filter(
-  //       Boolean
-  //     ),
-  //     render: [
-  //       'package.json',
-  //       'mrapi.config.ts',
-  //       'mrapi.config.js',
-  //       'README.md',
-  //       {
-  //         from: `src${isJs ? '-js' : ''}/**/*`,
-  //         to: 'src'
-  //       }
-  //     ].filter(Boolean),
-  //     renderOptions: {
-  //       async: true,
-  //       debug,
-  //       compileDebug: debug
-  //     }
-  //   }
-  // }
-
-
-  // protected async installing(flags: Record<string, any>) {
-  //   const { project } = this.data
-  //   this.spinner.succeed(`Created project ${this.style.cyan.bold(project.name)}`)
-
-  //   const { dependencies, devDependencies } = require(join(this.targetDir, 'package.json'))
-  //   if (isValidObject(dependencies) || isValidObject(devDependencies)) {
-  //     const installSpinner = this.createSpinner(`Installing dependencies...`).start()
-  //     try {
-  //       await this.installDeps(this.targetDir, flags.packageManager, false)
-  //       installSpinner.succeed(`Installed dependencies`)
-  //     } catch (err) {
-  //       installSpinner.fail('Failed to install dependencies. You can install them manually.')
-  //       this.error(err)
-  //     }
-  //   }
-  // }
-
   protected async writing() {
     const { project } = this.data
     console.log('\n')
@@ -113,10 +78,12 @@ export default class TemplateNodeBase extends Template {
     ).start()
 
     // 获取指定template path下的文件列表
-    const files = await glob(`${this.path}/**/*`, {
+    const files = await glob(this.globPath, {
       cwd: process.cwd(),
-      dot: true
+      dot: true,
+      absolute: true
     })
+
     // 创建项目
     await this.writingFiles(files)
 
@@ -134,22 +101,17 @@ export default class TemplateNodeBase extends Template {
       const env = this.context.get('env')
       const config = this.context.get('config')
       const packageManager = env.hasYarn ? 'yarn' : config.packageManager
-      const isYarn = packageManager === 'yarn'
 
       // if use yarn install, not need spinner
-      if (isYarn) {
+      const installSpinner = this.createSpinner(
+        `${packageManager} install`
+      ).start()
+      try {
         await this.installDeps(this.targetDir, packageManager, false)
-      } else {
-        const installSpinner = this.createSpinner(
-          `${packageManager} install`
-        ).start()
-        try {
-          await this.installDeps(this.targetDir, packageManager, false)
-          installSpinner.succeed('install dependencies success!\n')
-        } catch (err) {
-          installSpinner.fail('install dependencies fail!\n')
-          this.error(err)
-        }
+        installSpinner.succeed('install dependencies success!\n')
+      } catch (err) {
+        installSpinner.fail('install dependencies fail!\n')
+        this.error(err)
       }
     }
   }

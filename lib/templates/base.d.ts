@@ -6,6 +6,12 @@ export default class TemplateNodeBase extends Template {
     id: string;
     renderer: typeof ejs.render;
     features: any[];
+    path: string;
+    rule: {
+        glob: string;
+        ignores: never[];
+    };
+    get globPath(): string;
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
     protected writing(): Promise<void>;
