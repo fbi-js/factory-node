@@ -9,5 +9,4 @@ export default class TemplateMonorepo extends BaseClass {
     features: never[];
     constructor(factory: Factory);
     protected gathering(flags: Record<string, any>): Promise<void>;
-    protected writing(): Promise<void>;
 }

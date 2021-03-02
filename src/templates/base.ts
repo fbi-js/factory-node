@@ -2,6 +2,7 @@ import Factory from '..'
 import * as ejs from 'ejs'
 import { join } from 'path'
 import { Template, utils } from 'fbi'
+import glob = require('tiny-glob')
 
 const { formatName, isValidObject } = utils
 const { version } = require('../../package.json')
@@ -10,6 +11,15 @@ export default class TemplateNodeBase extends Template {
   id = 'node-base'
   renderer = ejs.render
   features: any[] = []
+  path = ''
+  rule = {
+    glob: '**/*',
+    ignores: [] // examples: '**/app.ts'
+  }
+
+  get globPath() {
+    return `${this.path}/${this.rule.glob}`
+  }
 
   constructor(public factory: Factory) {
     super(factory)
@@ -61,43 +71,46 @@ export default class TemplateNodeBase extends Template {
   }
 
   protected async writing() {
-    const debug = !!this.context.get('debug')
-    const isJs = this.data.project?.features?.javascript
+    const { project } = this.data
+    console.log('\n')
+    const writingSpinner = this.createSpinner(
+      this.style.green(`start create project: ${project.name}\n`)
+    ).start()
 
-    this.files = {
-      copy: ['.gitignore', '.editorconfig', '.prettierignore', isJs ? '' : 'tsconfig.json'].filter(
-        Boolean
-      ),
-      render: [
-        'package.json',
-        'mrapi.config.ts',
-        'mrapi.config.js',
-        'README.md',
-        {
-          from: `src${isJs ? '-js' : ''}/**/*`,
-          to: 'src'
-        }
-      ].filter(Boolean),
-      renderOptions: {
-        async: true,
-        debug,
-        compileDebug: debug
-      }
-    }
+    // 获取指定template path下的文件列表
+    const files = await glob(this.globPath, {
+      cwd: process.cwd(),
+      dot: true,
+      absolute: true
+    })
+
+    // 创建项目
+    await this.writingFiles(files)
+
+    writingSpinner.succeed(
+      this.style.green(`create project ${project.name} success!\n\n`)
+    )
   }
 
   protected async installing(flags: Record<string, any>) {
-    const { project } = this.data
-    this.spinner.succeed(`Created project ${this.style.cyan.bold(project.name)}`)
-
-    const { dependencies, devDependencies } = require(join(this.targetDir, 'package.json'))
+    const { dependencies, devDependencies } = require(join(
+      this.targetDir,
+      'package.json'
+    ))
     if (isValidObject(dependencies) || isValidObject(devDependencies)) {
-      const installSpinner = this.createSpinner(`Installing dependencies...`).start()
+      const env = this.context.get('env')
+      const config = this.context.get('config')
+      const packageManager = env.hasYarn ? 'yarn' : config.packageManager
+
+      // if use yarn install, not need spinner
+      const installSpinner = this.createSpinner(
+        `${packageManager} install`
+      ).start()
       try {
-        await this.installDeps(this.targetDir, flags.packageManager, false)
-        installSpinner.succeed(`Installed dependencies`)
+        await this.installDeps(this.targetDir, packageManager, false)
+        installSpinner.succeed('install dependencies success!\n')
       } catch (err) {
-        installSpinner.fail('Failed to install dependencies. You can install them manually.')
+        installSpinner.fail('install dependencies fail!\n')
         this.error(err)
       }
     }
