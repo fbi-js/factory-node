@@ -105,68 +105,68 @@ export default class TemplateService extends BaseClass {
 
   protected async writing() {
     await super.writing()
-    const { type, multiModules, multiTenants, graphql, openapi } = this.data.project.features
+    // const { type, multiModules, multiTenants, graphql, openapi } = this.data.project.features
 
-    this.files.render = [
-      'package.json',
-      'README.md',
-      'src/app.ts',
-      {
-        from: `configs/${type}.ts`,
-        to: './mrapi.config.ts'
-      }
-    ].filter(Boolean)
+    // this.files.render = [
+    //   'package.json',
+    //   'README.md',
+    //   'src/app.ts',
+    //   {
+    //     from: `configs/${type}.ts`,
+    //     to: './mrapi.config.ts'
+    //   }
+    // ].filter(Boolean)
 
-    // ./prisma
-    if (type === 'prisma') {
-      this.files.render.push({
-        from: 'prisma/service/schema.prisma',
-        to: multiModules || multiTenants ? './prisma/blog/schema.prisma' : './prisma/schema.prisma'
-      })
+    // // ./prisma
+    // if (type === 'prisma') {
+    //   this.files.render.push({
+    //     from: 'prisma/service/schema.prisma',
+    //     to: multiModules || multiTenants ? './prisma/blog/schema.prisma' : './prisma/schema.prisma'
+    //   })
 
-      if (multiTenants) {
-        this.files.render.push({
-          from: 'prisma/management/schema.prisma',
-          to: './prisma/management/schema.prisma'
-        })
-      }
-    }
+    //   if (multiTenants) {
+    //     this.files.render.push({
+    //       from: 'prisma/management/schema.prisma',
+    //       to: './prisma/management/schema.prisma'
+    //     })
+    //   }
+    // }
 
-    // src/service
-    if (multiModules) {
-      if (graphql) {
-        this.files.render.push({
-          from: 'src/service/graphql/*',
-          to: 'src/blog/graphql'
-        })
-        this.files.render.push({
-          from: 'src/common/graphql/*',
-          to: 'src/common/graphql'
-        })
-      }
-      if (openapi) {
-        this.files.render.push({
-          from: 'src/service/openapi/*',
-          to: 'src/blog/openapi'
-        })
-        this.files.render.push({
-          from: 'src/common/openapi/*',
-          to: 'src/common/openapi'
-        })
-      }
-    } else {
-      if (graphql) {
-        this.files.render.push({
-          from: 'src/service/graphql/*',
-          to: './src/graphql'
-        })
-      }
-      if (openapi) {
-        this.files.render.push({
-          from: 'src/service/openapi/*',
-          to: './src/openapi'
-        })
-      }
-    }
+    // // src/service
+    // if (multiModules) {
+    //   if (graphql) {
+    //     this.files.render.push({
+    //       from: 'src/service/graphql/*',
+    //       to: 'src/blog/graphql'
+    //     })
+    //     this.files.render.push({
+    //       from: 'src/common/graphql/*',
+    //       to: 'src/common/graphql'
+    //     })
+    //   }
+    //   if (openapi) {
+    //     this.files.render.push({
+    //       from: 'src/service/openapi/*',
+    //       to: 'src/blog/openapi'
+    //     })
+    //     this.files.render.push({
+    //       from: 'src/common/openapi/*',
+    //       to: 'src/common/openapi'
+    //     })
+    //   }
+    // } else {
+    //   if (graphql) {
+    //     this.files.render.push({
+    //       from: 'src/service/graphql/*',
+    //       to: './src/graphql'
+    //     })
+    //   }
+    //   if (openapi) {
+    //     this.files.render.push({
+    //       from: 'src/service/openapi/*',
+    //       to: './src/openapi'
+    //     })
+    //   }
+    // }
   }
 }
