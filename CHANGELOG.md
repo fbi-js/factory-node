@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.2](https://github.com/fbi-js/factory-node/compare/v2.3.1...v2.3.2) (2021-05-28)
+
+
+### Bug Fixes
+
+* **monorepo:** fix fbi create monorepo template error ([c14afe9](https://github.com/fbi-js/factory-node/commit/c14afe9a45b851285c51dd2b851aa3c1d811da3c))
+* **template/service:** add .ejs file ([fad0f7c](https://github.com/fbi-js/factory-node/commit/fad0f7c2c9cd879794a7b668567bff29984c8a34))
+
 ### [2.3.1](https://github.com/fbi-js/factory-node/compare/v2.3.0...v2.3.1) (2021-03-02)
 
 
